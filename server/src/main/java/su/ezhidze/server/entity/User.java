@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import su.ezhidze.server.model.UserRegistrationModel;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -28,6 +30,9 @@ public class User {
 
     private Boolean isOnline;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Chat> chats;
+
     public User() {
         isOnline = false;
     }
@@ -41,6 +46,7 @@ public class User {
         role = user.getRole();
         UUID = user.getUUID();
         isOnline = user.getIsOnline();
+        chats = user.getChats();
     }
 
     public User(final UserRegistrationModel userRegistrationModel) {

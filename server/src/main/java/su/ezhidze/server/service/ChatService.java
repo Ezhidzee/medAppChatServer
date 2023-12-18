@@ -2,9 +2,7 @@ package su.ezhidze.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import su.ezhidze.server.entity.Chat;
-import su.ezhidze.server.entity.Message;
-import su.ezhidze.server.entity.User;
+import su.ezhidze.server.entity.*;
 import su.ezhidze.server.exception.RecordNotFoundException;
 import su.ezhidze.server.model.ChatModel;
 import su.ezhidze.server.repository.ChatRepository;
@@ -47,9 +45,15 @@ public class ChatService {
         User user = new User();
 
         if (role.equals("DOCTOR")) {
-            user = doctorRepository.findById(userId).orElseThrow(() -> new RecordNotFoundException("Doctor not found"));
+            Doctor doctor  = doctorRepository.findById(userId).orElseThrow(() -> new RecordNotFoundException("Doctor not found"));
+            doctor.getChats().add(chat);
+            doctorRepository.save(doctor);
+            user = doctor;
         } else if (role.equals("PATIENT")) {
-            user = patientRepository.findById(userId).orElseThrow(() -> new RecordNotFoundException("Patient not found"));
+            Patient patient = patientRepository.findById(userId).orElseThrow(() -> new RecordNotFoundException("Patient not found"));
+            patient.getChats().add(chat);
+            patientRepository.save(patient);
+            user = patient;
         }
         chat.getUsers().add(user);
 

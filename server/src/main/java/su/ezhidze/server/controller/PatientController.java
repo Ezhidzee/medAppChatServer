@@ -46,7 +46,7 @@ public class PatientController {
         }
     }
 
-    @GetMapping(path = "/authentication")
+    @PostMapping(path = "/authentication")
     public ResponseEntity authentication(@RequestBody AuthenticationModel authenticationModel) {
         try {
             Validator.validate(authenticationModel);
