@@ -26,8 +26,6 @@ public class UserResponseModel {
 
     private Boolean isOnline;
 
-    private List<Integer> chatsIds;
-
     public UserResponseModel(final User user) {
         id = user.getId();
         firstName = user.getFirstName();
@@ -36,7 +34,6 @@ public class UserResponseModel {
         role = user.getRole();
         UUID = user.getUUID();
         isOnline = user.getIsOnline();
-        chatsIds = user.getChats().stream().map(Chat::getId).toList();
     }
 
     public Map<String, Object> toMap() {
@@ -47,7 +44,6 @@ public class UserResponseModel {
                 "email", email,
                 "role", role,
                 "UUID", UUID,
-                "isOnline", isOnline,
-                "chatsIds", chatsIds);
+                "isOnline", isOnline);
     }
 }
