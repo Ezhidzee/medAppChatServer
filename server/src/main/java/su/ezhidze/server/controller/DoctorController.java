@@ -96,7 +96,7 @@ public class DoctorController {
     }
 
     @PatchMapping(path = "/patch")
-    public ResponseEntity patchMovie(@RequestParam Integer id, @RequestBody Map<String, Object> fields) {
+    public ResponseEntity patchDoctor(@RequestParam Integer id, @RequestBody Map<String, Object> fields) {
         try {
             return ResponseEntity.ok(doctorService.patch(id, fields));
         } catch (RecordNotFoundException e) {
